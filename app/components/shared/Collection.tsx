@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from "react"
 import Card from "./Card";
+import Link from "next/link";
 
 interface CollectionProps{
     title: string;
@@ -35,7 +36,7 @@ const Collection: React.FC<CollectionProps> = ({title, list_type}) => {
         <div className="mt-[60px] flex flex-col gap-2">
           <div className="flex justify-between">
               <p className=" text-light-1 text-[30px] font-bold flex items-center">{title}</p>
-              <button className="bg-primary-500 rounded-xl p-2 px-10"><p className="text-light-1 font-bold">MORE</p></button>
+              <Link href="/movies-by-genre"><button className="bg-primary-500 rounded-xl p-2 px-10"><p className="text-light-1 font-bold">MORE</p></button></Link>
           </div>
           <div className="w-full grid grid-cols-2 min-[640px]:grid-cols-4 gap-2 min-[640px]:justify-between">
             {
