@@ -25,13 +25,13 @@ const Card:React.FC<CardProps> = ({
       };
       
     return(
-        <div className="w-full z-[1] cursor-pointer gap-2 sm:flex sm:flex-col h-full relative">
+        <div className="w-full cursor-pointer gap-2 sm:flex sm:flex-col h-full relative">
             <Image 
                 src={Heart}
-                width={24}
-                height={24}
+                width={30}
+                height={30}
                 alt="Heart"
-                className="absolute z-[111] top-2 left-2"
+                className="absolute top-2 left-2 hover:scale-[1.2] duration-500"
                 onClick={handleClick}
             />
             <img src={poster} className="rounded-2xl object-cover w-full" alt="" />
