@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams} from "next/navigation";
+import Image from "next/image";
+import Star from "@/public/assets/star-svgrepo-com (1).svg"
+
 
 const Page = () => {
     const router = useParams().id;
@@ -33,13 +36,39 @@ const Page = () => {
       },[])
 
   return (
-    // <p className="text-light-1">
-    //     {movie?.id}
-    // </p>
-    <div className="relative  w-full">
-      <img src={`http://image.tmdb.org/t/p/original${img?.backdrops[1].file_path}`} className="z-[1] object-cover" alt="" />
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-b z-[1] from-transparent to-black"></div>
-      {/* <button className="bg-primary-500 absolute z-[22] left-5 bottom-1 rounded-xl p-2 px-10"><p className="text-light-1 font-bold">WATCH</p></button> */}
+    <div className="flex flex-col gap-[100px]">
+      <div className="w-full flex justify-between">
+        <div className="w-1/3 h-full">
+          <img src={`http://image.tmdb.org/t/p/original${img?.posters[0].file_path}`} className="w-full h-full" alt="" />
+        </div>
+        <div className="w-1/2">
+          <div className="flex gap-10 items-center">
+            <p className="text-light-1 text-[30px]">{movie?.original_title}</p>
+            <div className="flex gap-1 justify-between items-center">
+              <p className="text-light-1 text-[20px] pt-[5px]">{movie?.vote_average}</p>
+              <Image 
+                  src={Star}
+                  width={20}
+                  height={20}
+                  alt="Heart"
+              />
+            </div>
+          </div>
+          
+          <p className="text-light-1">{movie?.genres[0].name}</p>
+          <p className="text-light-1 max-w-[500px]">Overview: {movie?.overview}</p>
+          <p className="text-light-1">BLALALLALALALALALALAL</p>
+          <p className="text-light-1">BLALALLALALALALALALAL</p>
+          <p className="text-light-1">BLALALLALALALALALALAL</p>
+          <p className="text-light-1">BLALALLALALALALALALAL</p>
+        </div>
+      </div>
+
+      <div className="w-full grid grid-cols-3 justify-items-center">
+          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+      </div>
     </div>
   )
 }
