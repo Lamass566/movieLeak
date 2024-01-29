@@ -11,8 +11,6 @@ const Page = () => {
     const [movie, setMovie] = useState<any>();
     const [img, setImg] = useState<any>();
 
-    // const [movies, setMovies] = useState<any[]>([])
-    // const [page, setPage] = useState<number>(1)
     const options = {
         method: 'GET',
         headers: {
@@ -41,7 +39,7 @@ const Page = () => {
         <div className="w-1/3 h-full">
           <img src={`http://image.tmdb.org/t/p/original${img?.posters[0].file_path}`} className="w-full h-full" alt="" />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 flex flex-col gap-2">
           <div className="flex gap-10 items-center">
             <p className="text-light-1 text-[30px]">{movie?.original_title}</p>
             <div className="flex gap-1 justify-between items-center">
@@ -56,11 +54,12 @@ const Page = () => {
           </div>
           
           <p className="text-light-1">{movie?.genres[0].name}</p>
+          <p className="text-orange-600">{movie?.tagline}</p>
           <p className="text-light-1 max-w-[500px]">Overview: {movie?.overview}</p>
-          <p className="text-light-1">BLALALLALALALALALALAL</p>
-          <p className="text-light-1">BLALALLALALALALALALAL</p>
-          <p className="text-light-1">BLALALLALALALALALALAL</p>
-          <p className="text-light-1">BLALALLALALALALALALAL</p>
+          <div className="w-full flex justify-between flex-wrap">
+            <p className="text-light-1 opacity-50">{movie?.release_date}</p>
+            <p className="text-light-1 opacity-50">{movie?.runtime}m</p>
+          </div>
         </div>
       </div>
 
