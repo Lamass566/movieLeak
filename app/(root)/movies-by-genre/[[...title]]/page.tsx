@@ -35,7 +35,7 @@ const Page = () => {
       <div className="w-full grid grid-cols-2 min-[640px]:grid-cols-4 gap-2 min-[640px]:justify-between">
           {
             movies.map((item)=>(
-              <Link href={`/detail-movie/${item.id}`}><Card key={item.id} title={item.original_title} genre="Movie" duration={Math.floor(Math.random() * 200) + 100} year={item.release_date.substr(0, 4)} poster={`http://image.tmdb.org/t/p/original${item.poster_path}`}/></Link>
+              <Link key={item.id} href={`/detail-movie/${item.id}`}><Card key={item.id} title={item.original_title} genre="Movie" duration={Math.floor(Math.random() * 200) + 100} year={item.release_date.substr(0, 4)} poster={`http://image.tmdb.org/t/p/original${item.poster_path}`}/></Link>
             ))
           }
       </div>

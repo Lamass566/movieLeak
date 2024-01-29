@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React, {useEffect} from "react";
 import Heart from "@/public/assets/heart.svg"
 import Image from "next/image";
 
@@ -23,6 +23,18 @@ const Card:React.FC<CardProps> = ({
     const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
         e.preventDefault();
       };
+
+      useEffect(()=>{
+        const isLoad = async () => {
+            if(poster === undefined)
+            {
+                return null;
+            }
+        }
+
+        isLoad();
+
+      },[poster])
       
     return(
         <div className="w-full cursor-pointer gap-2 sm:flex sm:flex-col h-full relative">

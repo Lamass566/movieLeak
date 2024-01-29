@@ -10,6 +10,8 @@ const Page = () => {
     const router = useParams().id;
     const [movie, setMovie] = useState<any>();
     const [img, setImg] = useState<any>();
+    const [isLoad, setIsLoad] = useState<boolean>(false)
+
 
     const options = {
         method: 'GET',
@@ -30,45 +32,53 @@ const Page = () => {
         fetch(`https://api.themoviedb.org/3/movie/${router}/images`, options)
         .then(response => response.json())
         .then((response) => {setImg(response); console.log(response)})
+        .then(()=>setIsLoad(true))
         .catch(err => console.error(err));
       },[])
 
   return (
-    <div className="flex flex-col gap-[100px]">
-      <div className="w-full flex justify-between">
-        <div className="w-1/3 h-full">
-          <img src={`http://image.tmdb.org/t/p/original${img?.posters[0].file_path}`} className="w-full h-full" alt="" />
-        </div>
-        <div className="w-1/2 flex flex-col gap-2">
-          <div className="flex gap-10 items-center">
-            <p className="text-light-1 text-[30px]">{movie?.original_title}</p>
-            <div className="flex gap-1 justify-between items-center">
-              <p className="text-light-1 text-[20px] pt-[5px]">{movie?.vote_average}</p>
-              <Image 
-                  src={Star}
-                  width={20}
-                  height={20}
-                  alt="Heart"
-              />
+    <>
+    {
+      isLoad && (
+        <div className="flex flex-col gap-[100px]">
+        <div className="w-full flex justify-between">
+          <div className="w-1/3 h-full">
+            <img src={`http://image.tmdb.org/t/p/original${img?.posters[0].file_path}`} className="w-full h-full" alt="" />
+          </div>
+          <div className="w-1/2 flex flex-col gap-2">
+            <div className="flex gap-10 items-center">
+              <p className="text-light-1 text-[30px]">{movie?.original_title}</p>
+              <div className="flex gap-1 justify-between items-center">
+                <p className="text-light-1 text-[20px] pt-[5px]">{movie?.vote_average}</p>
+                <Image 
+                    src={Star}
+                    width={20}
+                    height={20}
+                    alt="Heart"
+                />
+              </div>
+            </div>
+            
+            <p className="text-light-1">{movie?.genres[0].name}</p>
+            <p className="text-orange-600">{movie?.tagline}</p>
+            <p className="text-light-1 max-w-[500px]">Overview: {movie?.overview}</p>
+            <div className="w-full flex justify-between flex-wrap">
+              <p className="text-light-1 opacity-50">{movie?.release_date}</p>
+              <p className="text-light-1 opacity-50">{movie?.runtime}m</p>
             </div>
           </div>
-          
-          <p className="text-light-1">{movie?.genres[0].name}</p>
-          <p className="text-orange-600">{movie?.tagline}</p>
-          <p className="text-light-1 max-w-[500px]">Overview: {movie?.overview}</p>
-          <div className="w-full flex justify-between flex-wrap">
-            <p className="text-light-1 opacity-50">{movie?.release_date}</p>
-            <p className="text-light-1 opacity-50">{movie?.runtime}m</p>
-          </div>
+        </div>
+
+        <div className="w-full grid grid-cols-3 justify-items-center">
+            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
         </div>
       </div>
-
-      <div className="w-full grid grid-cols-3 justify-items-center">
-          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
-          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
-          <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
-      </div>
-    </div>
+    )
+    }
+    
+    </>
   )
 }
 

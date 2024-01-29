@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface CollectionProps{
     title: string;
-    list_type:string;
+    list_type: string;
 }
 
 const Collection: React.FC<CollectionProps> = ({title, list_type}) => {
