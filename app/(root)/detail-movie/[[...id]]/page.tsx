@@ -9,6 +9,8 @@ import Star from "@/public/assets/star-svgrepo-com (1).svg"
 const Page = () => {
     const router = useParams().id;
     const [movie, setMovie] = useState<any>();
+    const [contentState, setContentState] = useState<string>("Overview");
+    const [content, setContent] = useState<string>("");
     const [img, setImg] = useState<any>();
     const [isLoad, setIsLoad] = useState<boolean>(false)
 
@@ -25,14 +27,25 @@ const Page = () => {
         fetch(`https://api.themoviedb.org/3/movie/${router}?language=en-US`, options)
         .then(response => response.json())
         .then((response) => {setMovie(response); console.log(response)})
+        .then(()=>setIsLoad(true))
         .catch(err => console.error(err));
       },[])
+
+      useEffect(()=>{        
+        if(contentState === "Overview")
+        {
+          setContent(movie?.overview)
+        }
+        else
+        {
+          setContent("NO CONTENT YET!!!")
+        }
+      },[contentState,movie])
 
       useEffect(()=>{        
         fetch(`https://api.themoviedb.org/3/movie/${router}/images`, options)
         .then(response => response.json())
         .then((response) => {setImg(response); console.log(response)})
-        .then(()=>setIsLoad(true))
         .catch(err => console.error(err));
       },[])
 
@@ -69,11 +82,18 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="w-full grid grid-cols-3 justify-items-center">
-            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
-            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
-            <p className="text-light-1 uppercase border-b-4 border-orange-600">Overview</p>
+        <div className="flex flex-col gap-10">
+          <div className="w-full grid grid-cols-3 justify-items-center">
+              <button onClick={()=>setContentState("Overview")} className="text-light-1 uppercase border-b-4 border-transparent hover:border-orange-600 duration-500 cursor-pointer"><p>Overview</p></button>
+              <button onClick={()=>setContentState("Trailer")} className="text-light-1 uppercase border-b-4 border-transparent hover:border-orange-600 duration-500 cursor-pointer"><p>Trailer</p></button>
+              <button onClick={()=>setContentState("Casting")} className="text-light-1 uppercase border-b-4 border-transparent hover:border-orange-600 duration-500 cursor-pointer"><p>Casting</p></button>
+          </div>
+
+          <div>
+            <p className="text-light-1">{content}</p>
+          </div>
         </div>
+        
       </div>
     )
     }
